@@ -1,0 +1,23 @@
+=what is mongodb query api
+it is a interface you use to interact with data stored in mongodb
+its 3 main areas of functionality
+-crud operations
+-the aggregation frameword
+-specialized query features
+
+=the mongodb query api uses to perform
+Adhoc queries with mongosh, Compass, VS Code, or a MongoDB driver for the programming language you use.
+Data transformations using aggregation pipelines.
+Document join support to combine data from different collections.
+Graph and geospatial queries.
+Full-text search.
+Indexing to improve MongoDB query performance.
+Time series analysis.
+
+USING MONGODB CAMPASS AND MONDODB SHELL FOR FOLLOWING
+
+
+
+
+
+
