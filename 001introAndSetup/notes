@@ -1,0 +1,112 @@
+mongodb is a nosql database introduced in 2007
+and it stores data in flexible, bson not in tables
+it is schema less that is fields can vary across documents
+it supports horizontal scaling
+it also supports acid property
+
+
+
+=how data is stored in mongodb
+data is stored in collection
+each collection contains documents
+documents contains fields stored in bson format
+
+
+
+=mongodb is good when
+application with rapidly changing schemas
+big data and real time analytics 
+speed and scalibility is priority
+content heavy apps
+iot and mobiles apps where data is semi structured
+=mongodb is not ideal when
+system requires complex transactions across multiple tables
+application where data integrity and strict schema are critical
+workloads with heavy relational queries
+small scale apps where flexibility of mongodb adds unnecessary burden
+
+
+
+
+
+=how mongodb works
+uses a clint server model that is applications connects to mongodb via drivers
+supports replica sets for high availability 
+uses sharding for horizontal scaling
+query language is mongodb query language mql
+provides aggregation pipelines for advanced data processing
+
+
+
+=mongodb shell
+command line interface cli
+direct interaction with mongodb using js like commands
+runs queries and aggregation pipelines
+perform administrative tasks
+scriptable 
+lightweight and fast but requires knowledges of commands
+best for developers, system administrators, and advanced users comfortable with cli
+
+
+
+
+=mongodb compass
+graphical user interface gui
+visual exploration and management of mongodb databases
+full crud functionality 
+schema analysis and visualization
+real time server stats and performance monitoring
+visual explain plans for query optimization
+aggregation pipline builder with drag and drop interface
+authentication support
+best for analysts, beginners or anyone who prefers a visual interface over command line
+
+
+
+
+
+
+=mongodb atlas
+it is a fully managed cloud database service for mongodb
+instead of installing managing and maintaining mongodb on your own local servers or virtual machines, atlas handles all the heavy lifting for you in the cloud like aws, gcp, azure
+you can deploy your databases 
+it handles routines like patching, backups, configurations
+you can scale you databases up or out with few clicks or via an api without any downtime
+it includes built in security features like isolation, vpc peering and always on encryption for data at rest and in transit
+you can easily deploy clusters in different geographic regions to keep data close to your users for faster performance
+
+
+
+
+
+
+=local vs cloud database
+mongodb  can be installed locally which will allow you to host own mongodb server on your hardware.
+this requires you to manage your server, upgrades and any other maintenance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
