@@ -1,0 +1,17 @@
+Unique Identifier: Every document in a collection must have a unique _id. Two documents within the same collection cannot share the same _id.12
+Primary Key: The _id field functions like a primary key in SQL.3
+Automatic Generation: If an _id is not provided during document insertion, MongoDB automatically generates an ObjectId.4
+Default Data Type: The default type for a MongoDB-generated _id is ObjectId.5
+Immutable: Once a document is created, its _id generally cannot be changed.6
+Fast Searching: Because an index is automatically created on the _id field, searching by _id is very fast.7
+Document Identification: The _id is essential for finding, updating, or deleting specific documents.8
+
+The _id Structure (ObjectId)
+Format: An ObjectId is a 12-byte binary value.9
+Representation: It is typically shown as a 24-character hexadecimal string because 1 byte is represented by 2 hex characters.10
+
+Byte Breakdown:
+Timestamp (First 4 bytes): Records the document's creation time. This allows for the approximate creation time to be decoded from the ObjectId.1112
+Machine Identifier (Next 3 bytes): Identifies the specific machine or server that created the document, which is useful in distributed systems.13
+Process ID (Next 2 bytes): Identifies the specific process that generated the document.14
+Counter (Last 3 bytes): An incrementing counter that ensures uniqueness for multiple documents inserted within the same second.15
