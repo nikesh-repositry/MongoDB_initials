@@ -27,8 +27,14 @@ when you click in any database there comes a insert document option and there yo
 also you can use mongodb shell to run commands this feature is given by compass
 and another way to run mongodb commands is window terminal but for this first type mongosh which means mongodb shell to be connect with server
 
-USING MONGODB CAMPASS AND MONDODB SHELL FOR FOLLOWING
 
+
+
+
+
+
+
+****************************************USING MONGODB CAMPASS AND MONDODB SHELL FOR FOLLOWING
 1.
 Mongodb compass interface
 Create new database in seleted connection by + sign
@@ -41,7 +47,113 @@ In MongoDB, a database is not actually created until it gets content!
 In MongoDB, a collection is not actually created until it gets content!
 
 2.
-Basic Shell commands
+Basic Shell commands (show, use, find)
+show dbs =this shows all the databases present in the server
+use db_name =this is used to switched to the desired database
+db =this show the name of database which is currently active to perform operation with
+show collections =this shows collection presents inside the database
+
+FIND()*********************************************
+db.collection_name.find() =here db refers to the current database you are connected wtih
+                                collection_name is specific collection you want to query
+                                .find() retrieves documents from that collection
+by default, find() returns all documents in the collection
+you can pass a query object inside find() to filter results, THIS is querying data from database
+db.users.find({"name": "nikesh"})
+output =[ { _id: ObjectId('69a9e3bfdcbf51f18e9194c8'), name: 'nikesh' } ]
+db.collection_name.findOne() =to select only one document This method accepts a query object. If left empty, it will return the first document it finds.
+
+
+3.
+commands for collections
+show collections =list all collections in the current db
+db.createCollection("collection_name") =create a collection
+db.oldcollection_name.renameCollection("newcollection_name") =rename collection name
+db.collection_name.drop() =delete given collection
+
+4.
+window terminal 
+mongosh =means mongodb shell to connect with server and it is the first command to type in terminal of window to use mongodb
+if you trying first time then by default maybe you see test db
+
+will if you switched to any db that is not present but in command prompt it shows that it is switched
+to that db then it will created in the server when you put any collection inside it
+like
+use new_db
+new_db.createCollection("users")
+here new_db is databases, users is collection, and each row inside it is a document stored in json format
+and each key value pair is field-------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+************CRUD commands
+1. CREATE
+db.collection_name.insertOne({ __ : " "})
+insert a single document and this method inserts a single object into the database
+insert value inside the document collection even if the collection is not present previously and if present then also not issue at all
+
+db.collection_name.insertMany([{ __ : " "}, {}, {},.....])
+insert multiple documents at once and this method inserts an array of objects into the databases
+when typing in the shell, after opening an object with curly braces "{" you can press enter to start a new line
+in the editor without executing the command. the command will execute when you press enter after closing the braces
+
+
+2.READ
+db.collection_name.find() =retrive all documents in the collection, return a cursor object
+db.collection_name.find().pretty() =same ad find() but formats the output in more readable way
+db.collection_name.findOne({__:" "}) =retrieve the first document that matches the filter condition and if now specification is given then it output the first field of the document
+PROJECTION**********
+projection is the way to control which fields are returned when you run a find() or findOne() query. 
+By default mongoDB returns the entire document but with projection you can include or exclude specific fields.
+
+3.UPDATE
+db.collectionName.updateOne({ __ : " "},{$set:{ __ : " "}}) =updates a single document that matches the filter. $set modifies only specified fields
+inside first{} is for filter
+db.users.updatetMany({__:” “},{$set:{__:” “}}) =updates multiple documents that match the filter
+like 
+input: db.emp.updateOne({name:'a'},{$set:{name:'hazif'}})
+ouput:
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Inside second{} is for updated value
+
+4.DELETE
+=db.collectionName.deleteone({__:” “}) =delete a single document that matches the filter
+=db.collectionName.deleteMany({__:” “}) =delete all documents that match the filter
+
+EXAMPLES*****************************
+// CREATE
+db.users.insertOne({ name: "Alice", age: 25 });
+db.users.insertMany([{ name: "Bob" }, { name: "Charlie" }]);
+
+// READ
+db.users.find();
+db.users.find().pretty();
+db.users.findOne({ name: "Alice" });
+
+// UPDATE
+db.users.updateOne({ name: "Alice" }, { $set: { age: 26 } });
+db.users.updateMany({ age: { $lt: 30 } }, { $set: { status: "young" } });
+
+// DELETE
+db.users.deleteOne({ name: "Bob" });
+db.users.deleteMany({ status: "young" });
+
+
+
+
+
+
 
 
 
