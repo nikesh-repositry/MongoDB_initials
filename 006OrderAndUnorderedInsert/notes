@@ -1,1 +1,19 @@
+In MongoDB, insertMany can run in two modes: ordered (default) and unordered. Ordered inserts stop at the first error, while unordered inserts continue inserting the remaining documents even if some fail. This difference is crucial when handling duplicate _id values or validation errors. 
 
+🟢 Ordered Inserts ({ ordered: true })
+Default behavior if you don’t specify the option.
+Documents are inserted sequentially.
+If one document fails (e.g., duplicate _id), MongoDB stops immediately and does not attempt the remaining documents.
+Useful when you want strict control and consistency.
+
+🔵 Unordered Inserts ({ ordered: false })
+Documents are inserted in parallel (not strictly sequential).
+If one document fails, MongoDB skips it and continues with the rest.
+Useful when inserting large batches where some errors are acceptable.
+
+Both modes return a result object with:
+acknowledged → whether the operation was confirmed.
+insertedIds → IDs of successfully inserted documents.
+
+Unordered inserts are faster for bulk operations since they don’t stop at the first error.
+Ordered inserts are safer when you need predictable, all-or-nothing behavior. 
