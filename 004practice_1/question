@@ -1,1 +1,45 @@
+question level wise
+level 1 (setting up database)
+open mongodb shell and show available databases
+create a new database with name shopapp
+and check if it is created or not
+then create a collection inside it with name users
+
+level2 (website signup system)
+insert a user with name address and age
+insert three users at once with name address and age
+then show all users
+then show all users with any specific address
+
+level3 (product system)
+create a database for ecommerce products with a colletion name products
+then insert products inside of product collection with name price category and stock
+show all products
+show products with electronics category only
+count how many products are present in collection
+
+level 4(update operations)
+change address of all users 
+change the price of any product
+change the stock amount of any products
+increment stock amount of all products with electronics category
+update the address of an user
+
+level 5(delete operation)
+delete a user with specific name
+delete all users with less than 22 age
+delete a product
+
+level 6(real interview type)
+find all user having age greater then 20
+find all products with price less than 5000
+find a user with specific name
+count all users with address of noida
+check all collection in the database
+
+
+
+
+
+
 
