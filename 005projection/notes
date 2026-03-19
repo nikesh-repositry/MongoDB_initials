@@ -1,3 +1,31 @@
+==============================================================
+==============================================================
+==============================================================
+==============================================================
+Projection is used to specify which fields to include or exclude in query results.
+
+Example (Include specific fields):
+db.users.find({}, { name: 1, age: 1, _id: 0 })
+
+Explanation:
+- Returns only `name` and `age` fields.
+- `_id: 0` excludes the default `_id` field.
+
+Example (Exclude specific fields):
+db.users.find({}, { password: 0 })
+
+Explanation:
+- Returns all fields except `password`.
+
+Example (Nested field projection):
+db.users.find({}, { "address.city": 1, _id: 0 })
+
+Explanation:
+- Returns only the `city` field inside `address`.
+==============================================================
+==============================================================
+==============================================================
+==============================================================
 Projection in MongoDB is used to control which fields are returned in query results. By default, when you use find() or findOne(), MongoDB returns the entire document. Projection allows you to include or exclude specific fields.
 Syntax in js:
 db.collection.find({ filter }, { projection })
