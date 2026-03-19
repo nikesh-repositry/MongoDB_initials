@@ -1,1 +1,211 @@
+COMMANDS==============================================
+======================================================
+======================================================
+MONGODB IMPORT / EXPORT COMMANDS
+
+IMPORT COMMANDS
+These commands are used to move data from a file into a MongoDB database.
+
+Standard Import:
+mongoimport --db <db_name> --collection <collection_name> --file <file_name>
+
+Importing a JSON Array:
+mongoimport --db <db_name> --collection <collection_name> --file <file_name> --jsonArray
+
+
+EXPORT COMMANDS
+These commands are used to move data from a MongoDB database into a local file.
+Note: While some slides show --file, the standard flag for exporting is --out.
+
+Standard Export:
+mongoexport --db <db_name> --collection <collection_name> --out <file_name>
+
+Exporting as a JSON Array:
+mongoexport --db <db_name> --collection <collection_name> --out <file_name> --jsonArray
+
+
+FLAG BREAKDOWN
+--db         : Specifies the name of the database you are targeting.
+--collection : Specifies the specific collection within that database.
+--file       : (Used in Import) The path to the file you want to upload.
+--out        : (Used in Export) The path and name of the file you want to create.
+--jsonArray  : Necessary if the JSON file is formatted as a list of objects (wrapped in []).
+               Without this flag, MongoDB expects each document to be on a new line without array brackets.
+
+======================================================
+======================================================
+======================================================
+MONGODB EXPORT / IMPORT & CASE SENSITIVITY NOTES
+
+1. EXPORTING DATA
+   - Use `mongoexport` to export collections.
+   - Example:
+     mongoexport --db testdb --collection users --out users.json
+   - Options:
+     --db : database name
+     --collection : collection name
+     --out : output file path
+     --jsonArray : export as JSON array
+
+2. IMPORTING DATA
+   - Use `mongoimport` to import collections.
+   - Example:
+     mongoimport --db testdb --collection users --file users.json --jsonArray
+   - Options:
+     --db : target database
+     --collection : target collection
+     --file : input file path
+     --jsonArray : import JSON array format
+
+3. CASE SENSITIVITY RULES
+   - DATABASE NAMES: NOT CASE SENSITIVE
+     Example: `use TestDb` and `use testdb` → same database
+   - COLLECTION NAMES: CASE SENSITIVE
+     Example: `Users` and `users` → two different collections
+   - DOCUMENT FIELD NAMES: CASE SENSITIVE
+     Example: `{ Name: "Nikesh" }` vs `{ name: "Nikesh" }` → two different fields
+   - FIELD VALUES: CASE SENSITIVE BY DEFAULT
+     Example: Query `{ name: "Nikesh" }` will not match `{ name: "nikesh" }`
+
+4. CASE-INSENSITIVE QUERIES
+   - Use regex with `i` flag:
+     db.users.find({ name: /nikesh/i })
+   - Or define collation:
+     db.users.find({ name: "Nikesh" }).collation({ locale: "en", strength: 2 })
+
+5. BEST PRACTICES
+   - Use lowercase names for databases and collections.
+   - Keep field names consistent (avoid mixing `Name`, `name`, `NAME`).
+   - Apply collation for case-insensitive searches when needed.
+   - Always verify export/import paths and formats before running commands.
+
+SUMMARY:
+- EXPORT: mongoexport → JSON/CSV files
+- IMPORT: mongoimport → load data back
+- CASE SENSITIVITY:
+  DATABASE = NOT case sensitive
+  COLLECTION, FIELD NAMES, VALUES = CASE sensitive
+
+....
+.
+.
+.
+.
+.
+..
+.
+.
+.
+.
+..
+----------------------PRACTICAL CODES STEPS---------------------------------------------------------
+-----------------------------------------------------------------------
+i made a json file in a folder with some data named with users.json and users2.json
+and then i open terminal inside that folder
+-----------------------------------------------------------------------
+-------MongoDB BI Connector Download-----------------------------------
+-----------------------------------------------------------------------
+now we need a database tool cli for import export
+then type    mongoimport --version    inside command prompt 
+but if comes that 'mongoimport' is not recognized as an internal or external command,
+operable program or batch file.
+then do open in window  "edit the system environment variables"
+then environmental variables
+then path 
+then copy the path of bin inside of downloaded cli tool C:\mongoDB_CLI_databseTOOL\bin for mine
+then add it and press ok ok ok 
+then check again in cmd the previous command of version but in new cmd 
+so i typed it and i got response 
+C:\Users\Nikesh kumar>mongoimport --version
+mongoimport version: 100.15.0
+git version: 57a2120a5fe6b89223b86cbb3d194d17d48e3096
+Go version: go1.25.7
+   os: windows
+   arch: amd64
+   compiler: gc.
+.
+.
+.
+..
+.
+.
+
+.
+.
+.-----------------------------------------------------------------
+.------------------FIRST IMPORT STEPS--------------------------------
+.------------------------------------------------------------------
+now open powershell inside the folder where dataset json is present and type
+mongoimport --db mydb --collection users --file users2.json
+so after every -- is name of the declared entity like db,file,collection 
+then press enter
+then open compass and refresh localhost and see that the data is imported now
+now i will import another file users.json in the same database, with below command 
+mongoimport -d mydb -c users --file users.json
+(nothing i just used short keywords rather than previous long one)
+and i get response as below
+2026-03-19T16:53:26.036+0530    connected to: mongodb://localhost/
+2026-03-19T16:53:26.043+0530    10 document(s) imported successfully. 0 document(s) failed to import
+...
+.
+.
+.
+.
+.
+.------------------------------------------------------------------------
+.-------------------CONTINUE IMPORT--------------------------------------
+.-------------------------------------------------------------------------
+now i will edit the users2.json where each data are in object format and i edit it to inside array object format now we will se how to import this format data
+so if
+PS D:\000000000000000_CODE\mongoDB_initial\007> mongoimport --db mydb --collection products --file users2.json
+2026-03-19T16:58:27.521+0530    connected to: mongodb://localhost/
+2026-03-19T16:58:27.523+0530    Failed: cannot decode array into a D
+2026-03-19T16:58:27.523+0530    0 document(s) imported successfully. 0 document(s) failed to import.
+see if i followed the command as usual then error comes 
+so
+if i just add  --jsonArray in tail of the whole typed command like
+PS D:\000000000000000_CODE\mongoDB_initial\007> mongoimport --db mydb --collection products --file users2.json --jsonArray
+it will execute easily 
+.
+.
+.
+.
+.
+.------------------------------------------------------------------------------
+.------------------------------------NOW EXPORT--------------------------------
+-------------------------------------------------------------------------------
+PS D:\000000000000000_CODE\mongoDB_initial\007>  mongoexport --db mydb --collection users --out test.json 
+2026-03-19T17:03:28.121+0530    connected to: mongodb://localhost/
+2026-03-19T17:03:28.128+0530    exported 15 records
+so
+i command is mongoexport --db mydb --collection users --out test.json 
+here test.json could be anyname but with .json 
+and
+if 
+i typed --jsonArray at last
+ mongoexport --db mydb --collection users --out test.json --jsonArray
+then data comes in array object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
