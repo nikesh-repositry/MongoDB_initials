@@ -1,0 +1,47 @@
+MONGODB QUICK COMMAND NOTES AS PER FOUNDATION BASIS
+
+// LEVEL 1 - BASIC
+show dbs                 // Show all databases
+use shopapp              // Switch to database 'shopapp'
+db.createCollection("users") // Create a new collection
+
+// LEVEL 2 - INSERT & FIND
+db.users.insertOne({ name:"nikesh", address:"noida", age:21 }) // Insert single document
+db.users.insertMany([ {name:"singh", address:"delhi", age:23}, {name:"kumar", address:"noida", age:20} ]) // Insert multiple documents
+db.users.find()          // Show all documents
+db.users.find({address:"noida"}) // Find documents with address = noida
+
+// LEVEL 3 - COLLECTION EXAMPLES
+db.createCollection("products") // Create products collection
+db.products.insertMany([ {name:"iphone", price:80000, category:"electronics", stock:12}, {name:"tshirt", price:1200, category:"fashion", stock:25} ]) // Insert multiple products
+db.products.find()        // Show all products
+db.products.find({category:"electronics"}) // Find products in electronics category
+db.products.countDocuments() // Count total documents in collection
+
+// LEVEL 4 - UPDATE
+db.users.updateMany({address:"noida"}, {$set:{address:"delhi ncr"}}) // Update many documents
+db.products.updateOne({}, {$set:{price:50000}}) // Update first document
+db.products.updateOne({name:"laptop"}, {$set:{stock:4}}) // Update stock of laptop
+db.products.updateMany({category:"electronics"}, {$inc:{stock:6}}) // Increment stock by 6
+db.users.updateOne({address:"delhi"}, {$set:{address:"noida"}}) // Update one document
+
+// LEVEL 5 - DELETE
+db.users.deleteOne({name:"kumar"}) // Delete one document
+db.users.deleteMany({age:{$gt:22}}) // Delete many where age > 22
+db.products.deleteOne({}) // Delete first product document
+
+// LEVEL 6 - QUERY OPERATORS
+db.users.find({age:{$gt:20}}) // Find users with age > 20
+db.products.find({price:{$lt:5000}}) // Find products with price < 5000
+db.users.find({name:"nikesh"}) // Find user by name
+db.users.countDocuments({address:"noida"}) // Count users with address = noida
+show collections          // Show all collections in current DB
+
+// EXTRA USEFUL COMMANDS
+db.dropDatabase()         // Drop current database
+db.users.drop()           // Drop collection 'users'
+db.users.find().sort({age:1}) // Sort ascending by age
+db.users.find().sort({age:-1}) // Sort descending by age
+db.users.find({}, {name:1, age:1, _id:0}) // Projection: show only name & age
+db.users.find().limit(5)  // Limit results to 5 documents
+db.users.find().skip(5)   // Skip first 5 documents
