@@ -1,3 +1,38 @@
+===================================================
+===================================================
+===================================================
+-----------------------------------------------------------------------------------------------------------------------
+1. ORDERED OPERATIONS
+Ordered operations execute sequentially. If one operation fails, MongoDB stops executing the remaining operations.
+
+Example (Bulk Write - Ordered):
+db.users.bulkWrite([
+  { insertOne: { document: { name: "Nikesh", age: 25 } } },
+  { insertOne: { document: { name: "Ravi", age: 30 } } },
+  { updateOne: { filter: { name: "Nikesh" }, update: { $set: { age: 26 } } } }
+], { ordered: true })
+
+Explanation:
+- Operations run in order.
+- If one fails, subsequent operations are not executed.
+
+------------------------------------------------------------------------------------------------------------------------
+2. UNORDERED OPERATIONS
+Unordered operations execute independently. If one operation fails, MongoDB continues with the rest.
+
+Example (Bulk Write - Unordered):
+db.users.bulkWrite([
+  { insertOne: { document: { name: "Amit", age: 22 } } },
+  { insertOne: { document: { name: "Sita", age: 28 } } },
+  { updateOne: { filter: { name: "Amit" }, update: { $set: { age: 23 } } } }
+], { ordered: false })
+
+Explanation:
+- Operations run in parallel (not strictly sequential).
+- Failures do not stop other operations.
+================================================================
+================================================================
+================================================================
 In MongoDB, insertMany can run in two modes: ordered (default) and unordered. Ordered inserts stop at the first error, while unordered inserts continue inserting the remaining documents even if some fail. This difference is crucial when handling duplicate _id values or validation errors. 
 
 🟢 Ordered Inserts ({ ordered: true })
