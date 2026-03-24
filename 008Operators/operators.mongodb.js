@@ -137,6 +137,28 @@ db.users.find({age:{$type:'string'}})
 
 // EVALUATION OPERATOR
 use('test')
+// db.students.insertMany([
+//   {
+//     name: "Ravi",
+//     maths: 80,
+//     science: 70
+//   },
+//   {
+//     name: "Anita",
+//     maths: 60,
+//     science: 75
+//   },
+//   {
+//     name: "Karan",
+//     maths: 90,
+//     science: 85
+//   },
+//   {
+//     name: "Pooja",
+//     maths: 50,
+//     science: 65
+//   }
+// ])
 // db.employees.insertMany([
 //   {
 //     name: "Rahul",
@@ -198,7 +220,29 @@ db.employees.find({     //find out whose bonus+salary>60000
     }
 })
 
+// regex operator (regular expression)
+use('test')
+db.students.find({
+    name: {$regex: 'avi'}
+})
+db.students.find({
+    name: {$regex: 'a$'}
+}
+)
 
+// mod operator
+// db.numbers.insertMany([
+//     {value:10},
+//     {value:11},
+//     {value:1},
+//     {value:6},
+//     {value:58},
+//     {value:45},
+//     {value:99},
+// ])
+db.numbers.find({
+    value:{$mod:[2,0]}
+})
 
 
 
